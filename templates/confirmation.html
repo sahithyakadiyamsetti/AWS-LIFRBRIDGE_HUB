@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Confirmation - Blood Bank</title>
+    <link rel="stylesheet" href="/static/css/confirmation.css">
+</head>
+<body>
+    <div class="confirmation-container">
+        <img src="../static/images/person_5.jpg" alt="Confirmation" class="confirmation-image">
+        <h1>Thank You for Registering!</h1>
+        <h2>Thank you for registering, {{ user.fullname }}</h2>
+        <p>Email: {{ user.email }}</p>
+        <p>Blood Type: {{ user.blood_type }}</p>  
+        <p>You are now part of our lifesaving community. By donating blood, you will help save lives and make a significant impact.</p>
+        <a href="/" class="btn">Go to Home</a>
+        <a href="/login" class="btn">Login</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Respond to Blood Request - Blood Bank X</title>
+    <link rel="stylesheet" href="/static/css/respond.css">
+</head>
+<body>
+    <div class="respond-container">
+        <img src="{{ url_for('static', filename='images/blood_donation_image.jpeg') }}" alt="Blood Donation" class="donation-image">
+        <h1>Respond to Blood Request</h1>
+        <h2>Requester Details</h2>
+        <!-- <ul>
+            <li>Full Name: {{ requester_data.fullname }}</li>
+            <li>Email: {{ requester_data.email }}</li>
+            <li>Blood Type: {{ requester_data.blood_type }}</li>
+        </ul> -->
+        <p>Requester Name: {{ requester_data.full_name }}</p>
+        <p>Requester Email: {{ requester_data.email }}</p>
+        <p>Requester Blood Type: {{ requester_data.blood_type }}</p>
+        
+        <p>Request Details:</p>
+        <ul>
+            <li>Date: {{ request_data.date }}</li>
+            <li>Location: {{ request_data.location }}</li>
+            <li>Urgency: {{ request_data.urgency }}</li>
+        </ul>
+
+        <form action="{{ url_for('donate_blood', request_id=request_id, requester_id=requester_id) }}" method="post">
+            <input type="hidden" name="requester_id" value="{{ requester_id }}">
+            <input type="hidden" name="request_id" value="{{ request_id }}">
+            <button class="btn" type="submit">Donate Blood</button>
+        </form>
+            <!-- <button class="btn" onclick="donateBlood('{{ request[0]}}')">Donate Blood</button> -->
+    </div>
+
+    <script>
+        function donateBlood(requestId, requesterId) {
+            // Send a request to the server to update the request status and send a thank you message to the donator
+            fetch('/donate-blood/' + requesterId + '/' + requestId, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    request_id: requestId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Thank you for donating blood!');
+                    // Redirect to dashboard or home page
+                    window.location.href = '/';
+                } else {
+                    alert('Error donating blood. Please try again.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>

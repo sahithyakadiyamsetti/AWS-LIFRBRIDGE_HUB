@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Blood Bank</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>Saver Dashboard</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <!-- <li><a href="/profile">Profile</a></li> -->
+                    <li><a href="/request"><b><u>REQUEST</u></b></a></li>
+                    <li><a href="/">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <section class="user-info">
+                <h2>Welcome, {{user.fullname }}!!!</h2>
+                <p><b>Email</b>: {{user.email}}</p>
+                <p><b>Blood Type</b>: {{user.blood_type}}</p>
+            </section>
+
+            <section class="requests">
+                <h2>Upcoming Blood Donation Requests</h2>
+                {% if requests %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Location</th>
+                            <th>Urgency</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for request in requests %}
+                        <tr>
+                            <td>{{ request.date }}</td>
+                            <td>{{ request.location }}</td>
+                            <td>{{ request.urgency }}</td>
+                            <td><a href="{{ url_for('respond', requester_id=request.requester_id, request_id=request.request_id) }}">Respond</a></td>
+                        </tr>
+                        {% endfor %}
+                        <!-- Additional rows can be added dynamically -->
+                    </tbody>
+                </table>
+                {% else %}
+                <p>No upcoming requests found.</p>
+                {% endif %}
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 LIFEBRIDGE HUB. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
