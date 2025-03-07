@@ -18,7 +18,7 @@ The platform leverages AWS services, including Amazon RDS for secure and scalabl
 - **Database**: MySQL (AWS RDS)
 - **Cloud Hosting**: AWS EC2
 - **Version Control**: Git & GitHub
-- 
+  
 ## Project Architecture
 1. **AWS EC2 Instance**: Hosts the web application.
 2. **AWS RDS (MySQL Database)**: Stores user, donor, and request data.
@@ -93,4 +93,3 @@ The platform leverages AWS services, including Amazon RDS for secure and scalabl
 
 ## Contact
 For any queries or contributions, feel free to reach out via GitHub Issues.
-
